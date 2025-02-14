@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carros de Luxo - Inspired by Porsche</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header>
+    <div class="logo">
+      <img src="images/logo.png" alt="Logo Carros de Luxo">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#home">Início</a></li>
+        <li><a href="#modelos">Modelos</a></li>
+        <li><a href="#comprar">Comprar</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Banner Principal -->
+  <section id="home" class="banner">
+    <h1>O Luxo ao Seu Alcance</h1>
+    <p>Explore a coleção dos nossos carros exclusivos de luxo.</p>
+    <a href="#modelos" class="btn-banner">Ver Modelos</a>
+  </section>
+
+  <!-- Modelos de Carros -->
+  <section id="modelos" class="modelos">
+    <h2>Modelos Disponíveis</h2>
+    <div class="modelos-container">
+      <div class="modelo">
+        <img src="images/m2.jpg" alt="BMW M2">
+        <h3>BMW M2</h3>
+        <p>R$ 500.000,00</p>
+        <a href="#comprar" class="btn-comprar">Comprar</a>
+      </div>
+      <div class="modelo">
+        <img src="images/911.png" alt="PORSCHE 911">
+        <h3>PORSCHE 911</h3>
+        <p>R$ 750.000,00</p>
+        <a href="#comprar" class="btn-comprar">Comprar</a>
+      </div>
+      <div class="modelo">
+        <img src="images/c63s.jpg" alt="C63 S AMG">
+        <h3>C63 S AMG</h3>
+        <p>R$ 1.200.000,00</p>
+        <a href="#comprar" class="btn-comprar">Comprar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção de Compra -->
+  <section id="comprar" class="comprar">
+    <h2>Compre o Seu Carro</h2>
+    <p>Escolha o modelo desejado e finalize a sua compra com apenas alguns cliques!</p>
+    <form action="#" method="post">
+      <label for="modelo">Selecione o Modelo</label>
+      <select name="modelo" id="modelo">
+        <option value="modelo1">BMW M2</option>
+        <option value="modelo2">PORSCHE 911</option>
+        <option value="modelo3">C63 S AMG</option>
+      </select>
+      <label for="nome">Seu Nome</label>
+      <input type="text" id="nome" name="nome" required>
+      <label for="email">Seu E-mail</label>
+      <input type="email" id="email" name="email" required>
+      <button type="submit" class="btn-comprar">Finalizar Compra</button>
+    </form>
+  </section>
+
+  <!-- Rodapé -->
+  <footer>
+    <p>&copy; 2025 Carros de Luxo. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>
