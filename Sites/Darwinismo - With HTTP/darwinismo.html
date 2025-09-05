@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Darwinismo Social — Galeria HTTP</title>
+  <style>
+    body { 
+      font-family: Georgia, serif; 
+      background: #fdf6e3; 
+      padding: 20px; 
+      color: #333; 
+    }
+    header { 
+      text-align: center; 
+      background: #7f5539; 
+      color: #fdf6e3; 
+      padding: 25px; 
+      border-radius: 8px; 
+      margin-bottom: 20px; 
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    }
+    header h1 { margin: 0; font-size: 2em; }
+    header p { margin: 5px 0 0; font-style: italic; }
+
+    section { 
+      background: #fffaf0; 
+      padding: 20px; 
+      margin: 20px auto; 
+      border-radius: 8px; 
+      max-width: 900px; 
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    section h2 { color: #7f5539; margin-bottom: 10px; }
+
+    #gallery { display: flex; flex-wrap: wrap; justify-content: center; }
+    #gallery div { text-align: center; margin: 10px; }
+    #gallery img { 
+      max-width: 200px; 
+      border-radius: 6px; 
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3); 
+      border: 3px solid #e6ccb2; 
+    }
+    #gallery b { display: block; margin-top: 5px; color: #5f3e2e; }
+
+    button { 
+      margin: 5px; 
+      padding: 10px 15px; 
+      border: none; 
+      border-radius: 6px; 
+      background: #b08968; 
+      color: white; 
+      cursor: pointer; 
+      font-weight: bold; 
+    }
+    button:hover { background: #7f5539; }
+    input[type=text] { 
+      padding: 8px; 
+      border-radius: 6px; 
+      border: 1px solid #b08968; 
+      margin-bottom: 10px; 
+    }
+    pre { 
+      background: #f0ead6; 
+      padding: 10px; 
+      border-radius: 6px; 
+      white-space: pre-wrap; 
+      border: 1px solid #d9c6a3; 
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Darwinismo Social</h1>
+    <p>Uma teoria histórica aplicada à sociedade com base na seleção natural</p>
+  </header>
+
+  <section>
+    <h2>O que é o Darwinismo Social?</h2>
+    <p>
+      O Darwinismo Social foi uma corrente de pensamento que tentou aplicar a ideia da seleção natural de Charles Darwin
+      às sociedades humanas. Seus defensores acreditavam que os grupos "mais fortes" deveriam prosperar, enquanto os "mais fracos"
+      seriam naturalmente excluídos. Essa visão influenciou políticas imperialistas, racistas e eugenistas nos séculos XIX e XX,
+      mas hoje é amplamente criticada por ser uma distorção das ideias biológicas de Darwin.
+    </p>
+  </section>
+
+  <section>
+    <h2>Experimente os métodos HTTP</h2>
+    <p>Use os botões abaixo para manipular a galeria de imagens, simulando as ações de <b>GET, POST, PUT, PATCH e DELETE</b>:</p>
+    <input type="text" id="imgUrl" placeholder="Cole aqui a URL de uma imagem (ex: https://picsum.photos/300/200)" style="width:80%">
+    <br>
+    <button onclick="getImages()">GET (Obter imagens)</button>
+    <button onclick="postImage()">POST (Adicionar imagem)</button>
+    <button onclick="putImage()">PUT (Substituir primeira imagem)</button>
+    <button onclick="patchImage()">PATCH (Alterar título da primeira imagem)</button>
+    <button onclick="deleteImage()">DELETE (Remover última imagem)</button>
+    <h3>Resultado:</h3>
+    <pre id="output">Clique em um botão...</pre>
+  </section>
+
+  <section>
+    <h2>Galeria de Figuras Históricas</h2>
+    <div id="gallery"></div>
+  </section>
+
+  <script>
+    // "Banco de dados" em memória
+    let imagens = [
+      { id: 1, url: "https://i.pinimg.com/736x/28/ca/86/28ca8677c484df17e0075fddb103384f.jpg", titulo: "Imagem ilustrativa (Evolução)" },
+      { id: 2, url: "https://i.pinimg.com/736x/26/0d/87/260d87e260c9e19dacd0c6cc9c968e78.jpg", titulo: "Imagem ilustrativa (Darwin)" },
+      { id: 3, url: "https://i.pinimg.com/736x/d0/22/c3/d022c388c7c107733bf122f6aa7e472c.jpg", titulo: "Imagem ilustrativa (Darwin)" }
+    ];
+    let contadorId = 3;
+
+    function renderGallery() {
+      const galeria = document.getElementById("gallery");
+      galeria.innerHTML = "";
+      imagens.forEach(img => {
+        let el = document.createElement("div");
+        el.innerHTML = `<img src="${img.url}" alt="${img.titulo}"><b>${img.titulo}</b>`;
+        galeria.appendChild(el);
+      });
+    }
+
+    function getImages() {
+      renderGallery();
+      document.getElementById("output").textContent =
+        "GET → Imagens recuperadas:\n" + JSON.stringify(imagens, null, 2);
+    }
+
+    function postImage() {
+      const url = document.getElementById("imgUrl").value;
+      if (!url) return alert("Cole uma URL de imagem primeiro!");
+      imagens.push({ id: contadorId++, url, titulo: "Nova imagem (POST)" });
+      renderGallery();
+      document.getElementById("output").textContent =
+        "POST → Nova imagem adicionada:\n" + JSON.stringify(imagens[imagens.length-1], null, 2);
+    }
+
+    function putImage() {
+      if (imagens.length === 0) return;
+      const url = document.getElementById("imgUrl").value || "https://picsum.photos/400/250";
+      imagens[0] = { id: imagens[0].id, url, titulo: "Imagem substituída (PUT)" };
+      renderGallery();
+      document.getElementById("output").textContent =
+        "PUT → Primeira imagem substituída:\n" + JSON.stringify(imagens[0], null, 2);
+    }
+
+    function patchImage() {
+      if (imagens.length === 0) return;
+      imagens[0].titulo = "Título alterado (PATCH)";
+      renderGallery();
+      document.getElementById("output").textContent =
+        "PATCH → Título da primeira imagem atualizado:\n" + JSON.stringify(imagens[0], null, 2);
+    }
+
+    function deleteImage() {
+      if (imagens.length === 0) return;
+      const removida = imagens.pop();
+      renderGallery();
+      document.getElementById("output").textContent =
+        "DELETE → Última imagem removida:\n" + JSON.stringify(removida, null, 2);
+    }
+
+    renderGallery();
+  </script>
+</body>
+</html>
